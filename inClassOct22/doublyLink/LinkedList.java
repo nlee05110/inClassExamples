@@ -109,7 +109,7 @@ public class LinkedList {
 			list.append(15);
 			list.append(25);
 			list.show();
-			list.delete(15);
+			list.delete(15);	
 			list.append(40);
 			list.show();
 		
