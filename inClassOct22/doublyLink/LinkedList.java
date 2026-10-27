@@ -18,11 +18,15 @@ public class LinkedList {
 		
 		if(this.head==null) {
 			this.head=newNode;
-		}else {
+	        newNode.prev = null;	
+        }else {
 			while(curNode.next!=null) {
 				curNode = curNode.next;
+                
 			}
 			curNode.next = newNode;
+            newNode.prev = curNode;
+            
 		}
 	}
 	
@@ -36,6 +40,7 @@ public class LinkedList {
 			this.head=newNode;
 			this.tail=newNode;
 		}else {
+            newNode.prev = this.tail;  // References the newNode.prev to the current tail before tail is updated to newNode
 			this.tail.next = newNode;
 			this.tail = newNode;
 		}	
@@ -68,14 +73,21 @@ public class LinkedList {
 		if(this.head.value == value) {
 			result = this.head;
 			this.head = this.head.next;
+            this.head.prev = null; // Sets value of prev node to null if selected value is the head. 
+
+            
 		}else {
 			while(curNode!=null) {
 				if(curNode.value == value) {
 					result = curNode;
 					prevNode.next = curNode.next;
 					if(prevNode.next!=null) {
+                        
 						this.tail = prevNode.next;
+                        this.tail.prev = prevNode; // The newely selected tail.prev is referencing to the previous node. 
+                        
 					}else {
+                        prevNode.prev = this.tail;  // References the prevNode.prev to the current tail before tail is updated to prev Node
 						this.tail = prevNode;
 					}
 					break;
@@ -96,7 +108,7 @@ public class LinkedList {
 		while(curNode!=null) {
 			System.out.printf("---------------\n");
 			System.out.printf("%s\n", curNode.toString());
-			System.out.printf("Value: %d  Next: %h\n", curNode.value,curNode.next);
+			System.out.printf("Value: %d  Next: %h Prev: %h\n", curNode.value,curNode.next, curNode.prev);
 			curNode = curNode.next;
 		}
 	}
